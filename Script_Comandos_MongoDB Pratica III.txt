@@ -1,0 +1,31 @@
+1-use Empresa
+
+2- db.createColletion("Pessoa")
+
+3 -db.Pessoa.insertMany([{nome:"João",idade:20,cargo:"Estagiario",cidade:"Campina grande"},{nome:"Maria",idade:22,cargo:"Gerente",cidade:"João pessoa"},{nome:"Joca",idade:50,cargo:"Gerente",cidade:"Campina grande"},{nome:"Yuri",idade:30,cargo:"Programador",cidade:"Campina grande"},{nome:"Gabriel",idade:28,cargo:"Arquiteto",cidade:"João pessoa"},{nome:"Anderson",idade:38,cargo:"Gerente",cidade:"Natal"},{nome: "Arthur",idade:44,cargo:"Diretor",cidade:"Natal"},{nome:"Pedro",idade:19,cargo:"Estagiario",cidade:"João pessoa"},{nome:"Jorge",idade:33,cargo:"Motorista",cidade:"Campina grande"},{nome:"Joana",idade:27,cargo:"Gerente",cidade:"Natal"}])
+
+4-db.Pessoa.updateOne({nome:"João"}, {$set:{nome:"João da silva",endereco:"Rua adalberto"}})
+db.Pessoa.updateOne({nome:"Maria"}, {$set:{nome:"Maria do anjos",endereco:"Rua dom pedro I"}})
+
+5-db.Pessoa.find({idade: {$gt: 25}},{_id: 0})
+
+
+6 - db.Pessoa.aggregate([
+   { $group: {_id:"$cidade",  mediaIdade: { $avg: "$idade"} }  }
+])
+
+7 - db.createCollection("Setores")
+
+db.Setores.insertMany([{sigla:"RH",descrição:"Setor pessoal",salario:3000},{sigla:"GR",descrição:"Gerencia da empresa",salario:15000},{sigla:"PR",descrição:"Programadores da empresa",salario:7000},{sigla:"ET",descrição:"Estagiarios da empresa",salario:1800}])
+
+8 - db.Setores.aggregate([
+   { $group: {_id:"Setor",  maior: { $max: "$salario"} }  }
+])
+
+9 - db.Setores.aggregate([
+   { $group: {_id:"Setor",  maior: { $min: "$salario"} }  }
+])
+
+10 - db.Setores.aggregate([
+   { $group: {_id:"Setor",  maior: { $min: "$salario"} }  }
+])
